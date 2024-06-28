@@ -1,0 +1,51 @@
+# project build file
+# generated with premake ninja
+
+ninja_required_version = 1.6
+
+# core rules for Debug
+CFLAGS= -MD -MP -m64 -g -DGLFW_INCLUDE_NONE -DDEBUG -I../include -I../src/Headers
+rule cc
+  command = clang $CFLAGS -x c -MF $out.d -c -o $out $in
+  description = cc $out
+  depfile = $out.d
+  deps = gcc
+
+CXXFLAGS= -MD -MP -m64 -g -std=c++20 -DGLFW_INCLUDE_NONE -DDEBUG -I../include -I../src/Headers
+rule cxx
+  command = clang++ $CXXFLAGS -x c++ -MF $out.d -c -o $out $in
+  description = cxx $out
+  depfile = $out.d
+  deps = gcc
+
+RESFLAGS =  -DGLFW_INCLUDE_NONE -DDEBUG
+rule rc
+  command = windres -i $in -o $out $RESFLAGS
+  description = rc $out
+
+rule link
+  command = clang++ -o $out $in -lglfw3dll -L../lib -L/usr/lib64 -m64
+  description = link $out
+
+rule copy
+  command = copy /B /Y $in $out
+  description = copy $in $out
+
+rule custom_command
+  command = $CUSTOM_COMMAND
+  description = $CUSTOM_DESCRIPTION
+
+# build files
+build obj/Debug/main.o: cxx ../main.cpp
+build obj/Debug/Engine.o: cxx ../src/Engine.cpp
+build obj/Debug/Graphics.o: cxx ../src/Graphics.cpp
+build obj/Debug/Line.o: cxx ../src/Line.cpp
+build obj/Debug/PythagorasTree.o: cxx ../src/PythagorasTree.cpp
+build obj/Debug/Vector2.o: cxx ../src/Vector2.cpp
+build obj/Debug/Window.o: cxx ../src/Window.cpp
+build obj/Debug/glad.o: cxx ../src/glad.cpp
+
+# link executable
+build ../bin/Debug/Fractales.exe: link obj/Debug/main.o obj/Debug/Engine.o obj/Debug/Graphics.o obj/Debug/Line.o obj/Debug/PythagorasTree.o obj/Debug/Vector2.o obj/Debug/Window.o obj/Debug/glad.o
+
+build Fractales_Debug: phony ../bin/Debug/Fractales.exe

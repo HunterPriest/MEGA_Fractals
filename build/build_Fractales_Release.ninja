@@ -1,0 +1,51 @@
+# project build file
+# generated with premake ninja
+
+ninja_required_version = 1.6
+
+# core rules for Release
+CFLAGS= -MD -MP -m64 -O2 -DGLFW_INCLUDE_NONE -DDEBUG -I../include -I../src/Headers
+rule cc
+  command = clang $CFLAGS -x c -MF $out.d -c -o $out $in
+  description = cc $out
+  depfile = $out.d
+  deps = gcc
+
+CXXFLAGS= -MD -MP -m64 -O2 -DGLFW_INCLUDE_NONE -DDEBUG -I../include -I../src/Headers
+rule cxx
+  command = clang++ $CXXFLAGS -x c++ -MF $out.d -c -o $out $in
+  description = cxx $out
+  depfile = $out.d
+  deps = gcc
+
+RESFLAGS =  -DGLFW_INCLUDE_NONE -DDEBUG
+rule rc
+  command = windres -i $in -o $out $RESFLAGS
+  description = rc $out
+
+rule link
+  command = clang++ -o $out $in -lglfw3dll -L../lib -L/usr/lib64 -m64
+  description = link $out
+
+rule copy
+  command = copy /B /Y $in $out
+  description = copy $in $out
+
+rule custom_command
+  command = $CUSTOM_COMMAND
+  description = $CUSTOM_DESCRIPTION
+
+# build files
+build obj/Release/main.o: cxx ../main.cpp
+build obj/Release/Engine.o: cxx ../src/Engine.cpp
+build obj/Release/Graphics.o: cxx ../src/Graphics.cpp
+build obj/Release/Line.o: cxx ../src/Line.cpp
+build obj/Release/PythagorasTree.o: cxx ../src/PythagorasTree.cpp
+build obj/Release/Vector2.o: cxx ../src/Vector2.cpp
+build obj/Release/Window.o: cxx ../src/Window.cpp
+build obj/Release/glad.o: cxx ../src/glad.cpp
+
+# link executable
+build ../bin/Release/Fractales.exe: link obj/Release/main.o obj/Release/Engine.o obj/Release/Graphics.o obj/Release/Line.o obj/Release/PythagorasTree.o obj/Release/Vector2.o obj/Release/Window.o obj/Release/glad.o
+
+build Fractales_Release: phony ../bin/Release/Fractales.exe
