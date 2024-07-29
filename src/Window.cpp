@@ -11,7 +11,6 @@ void engine::Window::errorCallback(int error_code, const char *description)
 
 int engine::Window::createWindow()
 {
-    nlohmann::json winConf;
     std::ifstream f("Configs/Window.json");
     winConf = nlohmann::json::parse(f);
 
@@ -23,13 +22,11 @@ int engine::Window::createWindow()
         return -1;
     }
 
-    glfwWindowHint (GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint (GLFW_CONTEXT_VERSION_MINOR, 0);
-    glfwWindowHint (GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-    glfwWindowHint (GLFW_SAMPLES, 16);
+    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+    glfwWindowHint(GLFW_SAMPLES, 1);
 
-    std::string name = winConf["name"];
-    _window = glfwCreateWindow((int)winConf["width"], (int)winConf["height"], name.c_str(), NULL, NULL);
+    title = winConf["name"];
+    _window = glfwCreateWindow((int)winConf["width"], (int)winConf["height"], title.c_str(), NULL, NULL);
 
     if (!_window)
     {
@@ -42,7 +39,12 @@ int engine::Window::createWindow()
     return 1;
 }
 
-GLFWwindow* engine::Window::GetWindow()
+GLFWwindow* engine::Window::getWindow()
 {
     return _window;
+}
+
+nlohmann::json engine::Window::getConfig()
+{
+    return winConf;
 }

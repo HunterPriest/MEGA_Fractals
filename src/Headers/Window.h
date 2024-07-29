@@ -1,6 +1,8 @@
 #pragma once
 
 #include "../include/GLFW/glfw3.h"
+#include <string>
+#include <nlohmann/json.hpp>
 
 namespace engine
 {
@@ -8,10 +10,14 @@ namespace engine
     {
         private:
         GLFWwindow *_window;
+        nlohmann::json winConf;
         static void errorCallback(int error_code, const char *description);
 
         public:
+        std::string title;
+        
         int createWindow();
-        GLFWwindow* GetWindow();
+        GLFWwindow* getWindow();
+        nlohmann::json getConfig();
     };
 }

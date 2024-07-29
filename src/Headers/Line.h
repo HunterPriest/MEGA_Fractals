@@ -2,6 +2,7 @@
 
 #include <Vector2.h>
 #include <glad/glad.h>
+#include <vector>
 
 namespace figure
 {
@@ -9,10 +10,12 @@ namespace figure
     {
         private:
         GLuint _VAO, _VBO;
+        int _size;
+        float _thickness; 
 
         public:
-            Line(engine::Vector2 point1, engine::Vector2 point2, float thickness);
-            Line(Line &&);
+            Line(float thickness = 0.1f);
+            void setVerticles(float verticles[], int sizeVerticles);
             ~Line();
             void render();
     };

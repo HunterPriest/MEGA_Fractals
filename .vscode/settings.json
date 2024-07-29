@@ -75,7 +75,13 @@
         "valarray": "cpp",
         "xhash": "cpp",
         "xtree": "cpp",
-        "*.rh": "cpp"
+        "*.rh": "cpp",
+        "cstdarg": "cpp"
     },
-    "C_Cpp.errorSquiggles": "disabled"
+    "C_Cpp.errorSquiggles": "disabled",
+    "Lua.diagnostics.disable": [
+        "undefined-global",
+        "undefined-field",
+        "lowercase-global"
+    ]
 }

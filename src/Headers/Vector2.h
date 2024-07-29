@@ -2,12 +2,9 @@
 
 namespace engine
 {
-    class Vector2
+    struct Vector2
     {
-        public:
-            float x;
-            float y;
-        
-        Vector2 (float x, float y);
+        float x = 0.0f;
+        float y = 0.0f;
     };
 }
