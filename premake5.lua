@@ -6,10 +6,9 @@ workspace "Fractales"
     location "build"
 
 project "Fractales"
-    symbols "On"
     kind "ConsoleApp"
     language "C++"
-    targetdir "bin/%{cfg.buildcfg}"
+    targetdir "build/bin/%{cfg.buildcfg}"
 
     files { "src/*.cpp", "src/Core/*.cpp" , "src/Gui/*.cpp" , "src/imgui/*.cpp", "src/Fractals/*.cpp" }
     includedirs { "include",  "src/Headers", "include/imgui", "src/Core", "src/Gui", "src/Fractals" } 

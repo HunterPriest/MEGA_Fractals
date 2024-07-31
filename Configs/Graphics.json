@@ -1,4 +1,3 @@
-
 {
     "vertexPath" : "Shaders/vertex.shader",
     "fragmentPath" : "Shaders/fragment.shader"

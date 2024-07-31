@@ -8,7 +8,7 @@
             "type": "lldb",
             "request": "launch",
             "name": "Debug",
-            "program": "${workspaceFolder}/bin/Debug/Fractales.exe",
+            "program": "${workspaceFolder}/build/bin/Debug/Fractales.exe",
             "args": [],
             "cwd": "${workspaceFolder}"
         }

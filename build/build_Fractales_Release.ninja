@@ -4,14 +4,14 @@
 ninja_required_version = 1.6
 
 # core rules for Release
-CFLAGS= -MD -MP -m64 -O2 -g -DGLFW_INCLUDE_NONE -DRelease -I../include -I../src/Headers -I../include/imgui -I../src/Core -I../src/Gui -I../src/Fractals
+CFLAGS= -MD -MP -m64 -O2 -DGLFW_INCLUDE_NONE -DRelease -I../include -I../src/Headers -I../include/imgui -I../src/Core -I../src/Gui -I../src/Fractals
 rule cc
   command = clang $CFLAGS -x c -MF $out.d -c -o $out $in
   description = cc $out
   depfile = $out.d
   deps = gcc
 
-CXXFLAGS= -MD -MP -m64 -O2 -g -DGLFW_INCLUDE_NONE -DRelease -I../include -I../src/Headers -I../include/imgui -I../src/Core -I../src/Gui -I../src/Fractals
+CXXFLAGS= -MD -MP -m64 -O2 -DGLFW_INCLUDE_NONE -DRelease -I../include -I../src/Headers -I../include/imgui -I../src/Core -I../src/Gui -I../src/Fractals
 rule cxx
   command = clang++ $CXXFLAGS -x c++ -MF $out.d -c -o $out $in
   description = cxx $out
@@ -45,7 +45,6 @@ build obj/Release/Gui.o: cxx ../src/Gui/Gui.cpp
 build obj/Release/GuiElement.o: cxx ../src/Gui/GuiElement.cpp
 build obj/Release/Line.o: cxx ../src/Line.cpp
 build obj/Release/Shader.o: cxx ../src/Shader.cpp
-build obj/Release/Window.o: cxx ../src/Window.cpp
 build obj/Release/glad.o: cxx ../src/glad.cpp
 build obj/Release/imgui.o: cxx ../src/imgui/imgui.cpp
 build obj/Release/imgui_demo.o: cxx ../src/imgui/imgui_demo.cpp
@@ -57,6 +56,6 @@ build obj/Release/imgui_widgets.o: cxx ../src/imgui/imgui_widgets.cpp
 build obj/Release/main.o: cxx ../src/main.cpp
 
 # link executable
-build ../bin/Release/Fractales.exe: link obj/Release/Core.o obj/Release/Engine.o obj/Release/DragonsCurve.o obj/Release/Fractal.o obj/Release/PythagorasTree.o obj/Release/Gui.o obj/Release/GuiElement.o obj/Release/Line.o obj/Release/Shader.o obj/Release/Window.o obj/Release/glad.o obj/Release/imgui.o obj/Release/imgui_demo.o obj/Release/imgui_draw.o obj/Release/imgui_impl_glfw.o obj/Release/imgui_impl_opengl3.o obj/Release/imgui_tables.o obj/Release/imgui_widgets.o obj/Release/main.o
+build bin/Release/Fractales.exe: link obj/Release/Core.o obj/Release/Engine.o obj/Release/DragonsCurve.o obj/Release/Fractal.o obj/Release/PythagorasTree.o obj/Release/Gui.o obj/Release/GuiElement.o obj/Release/Line.o obj/Release/Shader.o obj/Release/glad.o obj/Release/imgui.o obj/Release/imgui_demo.o obj/Release/imgui_draw.o obj/Release/imgui_impl_glfw.o obj/Release/imgui_impl_opengl3.o obj/Release/imgui_tables.o obj/Release/imgui_widgets.o obj/Release/main.o
 
-build Fractales_Release: phony ../bin/Release/Fractales.exe
+build Fractales_Release: phony bin/Release/Fractales.exe

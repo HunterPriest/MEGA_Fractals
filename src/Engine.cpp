@@ -24,7 +24,7 @@ namespace engine
     int update()
     {
         unsigned int shaderId = Core::getShader();
-        figure::PythagorasTree tree(1, 0, 3, 25, 3, 0.4, 0, &shaderId);
+        figure::PythagorasTree tree(1, 0, 2, 25, 3, 0.4, 0, &shaderId);
         //figure::DragonsCurve curve(2, 0.1f, 0, &shaderId);
         int windowSize = Core::getWindowedHeight();
 
@@ -63,7 +63,6 @@ namespace engine
                 Core::setWindowSize(windowSize, windowSize);
             }
             tree.withdrawUI();
-            if(ImGui::Button("Rotate")) {   }
             ImGui::End();
 
             Core::endFrame();

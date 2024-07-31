@@ -45,7 +45,6 @@ build obj/Debug/Gui.o: cxx ../src/Gui/Gui.cpp
 build obj/Debug/GuiElement.o: cxx ../src/Gui/GuiElement.cpp
 build obj/Debug/Line.o: cxx ../src/Line.cpp
 build obj/Debug/Shader.o: cxx ../src/Shader.cpp
-build obj/Debug/Window.o: cxx ../src/Window.cpp
 build obj/Debug/glad.o: cxx ../src/glad.cpp
 build obj/Debug/imgui.o: cxx ../src/imgui/imgui.cpp
 build obj/Debug/imgui_demo.o: cxx ../src/imgui/imgui_demo.cpp
@@ -57,6 +56,6 @@ build obj/Debug/imgui_widgets.o: cxx ../src/imgui/imgui_widgets.cpp
 build obj/Debug/main.o: cxx ../src/main.cpp
 
 # link executable
-build ../bin/Debug/Fractales.exe: link obj/Debug/Core.o obj/Debug/Engine.o obj/Debug/DragonsCurve.o obj/Debug/Fractal.o obj/Debug/PythagorasTree.o obj/Debug/Gui.o obj/Debug/GuiElement.o obj/Debug/Line.o obj/Debug/Shader.o obj/Debug/Window.o obj/Debug/glad.o obj/Debug/imgui.o obj/Debug/imgui_demo.o obj/Debug/imgui_draw.o obj/Debug/imgui_impl_glfw.o obj/Debug/imgui_impl_opengl3.o obj/Debug/imgui_tables.o obj/Debug/imgui_widgets.o obj/Debug/main.o
+build bin/Debug/Fractales.exe: link obj/Debug/Core.o obj/Debug/Engine.o obj/Debug/DragonsCurve.o obj/Debug/Fractal.o obj/Debug/PythagorasTree.o obj/Debug/Gui.o obj/Debug/GuiElement.o obj/Debug/Line.o obj/Debug/Shader.o obj/Debug/glad.o obj/Debug/imgui.o obj/Debug/imgui_demo.o obj/Debug/imgui_draw.o obj/Debug/imgui_impl_glfw.o obj/Debug/imgui_impl_opengl3.o obj/Debug/imgui_tables.o obj/Debug/imgui_widgets.o obj/Debug/main.o
 
-build Fractales_Debug: phony ../bin/Debug/Fractales.exe
+build Fractales_Debug: phony bin/Debug/Fractales.exe

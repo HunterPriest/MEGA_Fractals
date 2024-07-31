@@ -7,8 +7,9 @@
                 "${workspaceFolder}/src/Headers",
                 "${workspaceFolder}/src/Core",
                 "${workspaceFolder}/src/Gui",
-                "${workspaceFolder}/src", 
-                "${workspaceFolder}/include"
+                "${workspaceFolder}/src",
+                "${workspaceFolder}/include",
+                "${workspaceFolder}/src/Fractals"
             ],
             "defines": [
                 "_DEBUG",
