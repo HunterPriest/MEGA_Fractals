@@ -1,5 +1,5 @@
 #include<Fractal.h>
-#include<imgui/imgui.h>
+#include<imgui.h>
 
 void figure::Fractal::withdrawUI()
 {

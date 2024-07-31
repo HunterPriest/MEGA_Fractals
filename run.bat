@@ -5,4 +5,4 @@ popd
 goto :eof
 :run
 popd
-build\bin\Debug\Fractales.exe
+build\bin\Debug\Fractals.exe

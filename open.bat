@@ -1,1 +1,1 @@
-build\bin\Debug\Fractales.exe
+build\bin\Debug\Fractals.exe

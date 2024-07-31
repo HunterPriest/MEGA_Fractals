@@ -2,12 +2,10 @@
 # generated with premake ninja
 
 # build projects
-subninja ./build_Fractales_Debug.ninja
-subninja ./build_Fractales_Release.ninja
+subninja ./build_Fractals_Debug.ninja
 
 # targets
-build Debug: phony Fractales_Debug
-build Release: phony Fractales_Release
+build Debug: phony Fractals_Debug
 
 # default target
-default Fractales_Debug
+default Fractals_Debug

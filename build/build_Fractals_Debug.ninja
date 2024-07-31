@@ -1,0 +1,61 @@
+# project build file
+# generated with premake ninja
+
+ninja_required_version = 1.6
+
+# core rules for Debug
+CFLAGS= -MD -MP -m64 -g -DGLFW_INCLUDE_NONE -DDEBUG -I../src/Headers -I../src/Core -I../src/Gui -I../src/Fractals -I../vendor/glad -I../vendor/glfw/include -I../vendor/glm -I../vendor/imgui/backends -I../vendor/imgui -I../vendor/nlohmann/include
+rule cc
+  command = clang $CFLAGS -x c -MF $out.d -c -o $out $in
+  description = cc $out
+  depfile = $out.d
+  deps = gcc
+
+CXXFLAGS= -MD -MP -m64 -g -std=c++20 -DGLFW_INCLUDE_NONE -DDEBUG -I../src/Headers -I../src/Core -I../src/Gui -I../src/Fractals -I../vendor/glad -I../vendor/glfw/include -I../vendor/glm -I../vendor/imgui/backends -I../vendor/imgui -I../vendor/nlohmann/include
+rule cxx
+  command = clang++ $CXXFLAGS -x c++ -MF $out.d -c -o $out $in
+  description = cxx $out
+  depfile = $out.d
+  deps = gcc
+
+RESFLAGS =  -DGLFW_INCLUDE_NONE -DDEBUG
+rule rc
+  command = windres -i $in -o $out $RESFLAGS
+  description = rc $out
+
+rule link
+  command = clang++ -o $out $in -lglfw3dll -L../lib -L/usr/lib64 -m64 -fuse-ld=lld -g -Wl
+  description = link $out
+
+rule copy
+  command = copy /B /Y $in $out
+  description = copy $in $out
+
+rule custom_command
+  command = $CUSTOM_COMMAND
+  description = $CUSTOM_DESCRIPTION
+
+# build files
+build obj/Core.o: cxx ../src/Core/Core.cpp
+build obj/Engine.o: cxx ../src/Engine.cpp
+build obj/DragonsCurve.o: cxx ../src/Fractals/DragonsCurve.cpp
+build obj/Fractal.o: cxx ../src/Fractals/Fractal.cpp
+build obj/PythagorasTree.o: cxx ../src/Fractals/PythagorasTree.cpp
+build obj/Gui.o: cxx ../src/Gui/Gui.cpp
+build obj/GuiElement.o: cxx ../src/Gui/GuiElement.cpp
+build obj/Line.o: cxx ../src/Line.cpp
+build obj/Shader.o: cxx ../src/Shader.cpp
+build obj/main.o: cxx ../src/main.cpp
+build obj/glad.o: cxx ../vendor/glad/glad/glad.cpp
+build obj/imgui_impl_glfw.o: cxx ../vendor/imgui/backends/imgui_impl_glfw.cpp
+build obj/imgui_impl_opengl3.o: cxx ../vendor/imgui/backends/imgui_impl_opengl3.cpp
+build obj/imgui.o: cxx ../vendor/imgui/imgui.cpp
+build obj/imgui_demo.o: cxx ../vendor/imgui/imgui_demo.cpp
+build obj/imgui_draw.o: cxx ../vendor/imgui/imgui_draw.cpp
+build obj/imgui_tables.o: cxx ../vendor/imgui/imgui_tables.cpp
+build obj/imgui_widgets.o: cxx ../vendor/imgui/imgui_widgets.cpp
+
+# link executable
+build bin/Debug/Fractals.exe: link obj/Core.o obj/Engine.o obj/DragonsCurve.o obj/Fractal.o obj/PythagorasTree.o obj/Gui.o obj/GuiElement.o obj/Line.o obj/Shader.o obj/main.o obj/glad.o obj/imgui_impl_glfw.o obj/imgui_impl_opengl3.o obj/imgui.o obj/imgui_demo.o obj/imgui_draw.o obj/imgui_tables.o obj/imgui_widgets.o
+
+build Fractals_Debug: phony bin/Debug/Fractals.exe
