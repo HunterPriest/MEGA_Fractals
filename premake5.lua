@@ -10,26 +10,29 @@ project "Fractals"
     targetdir "build/bin/%{cfg.buildcfg}"
 
     files { "src/*.cpp",
-    "src/Core/*.cpp",
-    "src/Gui/*.cpp",
-    "src/Fractals/*.cpp",
-    "vendor/imgui/backends/imgui_impl_opengl3.cpp",
-    "vendor/imgui/backends/imgui_impl_glfw.cpp",
-    "vendor/imgui/*.cpp",
-    "vendor/glad/glad/glad.cpp"
+     "src/Core/*.cpp",
+     "src/Gui/*.cpp",
+     "src/Fractals/*.cpp",
+     "vendor/imgui/backends/imgui_impl_opengl3.cpp",
+     "vendor/imgui/backends/imgui_impl_glfw.cpp",
+     "vendor/imgui/*.cpp",
+     "vendor/glad/glad/glad.cpp", 
+     "src/Tools/*.cpp", 
+     "src/Figure/*.cpp"
     }
-    includedirs { "src/Headers",
-    "src/Core",
-    "src/Gui",
-    "src/Fractals",
-    "vendor/glad", 
-    "vendor/glfw/include", 
-    "vendor/glm",
-    "vendor/imgui/backends", 
-    "vendor/imgui",
-    "vendor/nlohmann/include"
+    includedirs { "src/Core",
+     "src/Gui",
+     "src/Fractals",
+     "vendor/glad", 
+     "vendor/glfw/include", 
+     "vendor/glm",
+     "vendor/imgui/backends", 
+     "vendor/imgui",
+     "vendor/nlohmann/include", 
+     "src/Tools", 
+     "src/Figure/"
     } 
-    libdirs { "lib" }
+    libdirs { "vendor/lib" }
     links { "glfw3dll" }
     defines { "GLFW_INCLUDE_NONE" }
 

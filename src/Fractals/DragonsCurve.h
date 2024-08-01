@@ -19,8 +19,8 @@ namespace figure
             unsigned int *_shaderId;
             glm::vec2 scale;
             float _length;
-            int _iterations;
-            engine::Vector2 _startPoint;
+            int _iterations, *VBO;
+            engine::Vector2 startPoint;
 
             void drawCurve(engine::Vector2 startPoint, float length, float angle, int iterations);
 
@@ -28,6 +28,5 @@ namespace figure
             DragonsCurve(int iterations, float length, float xPos, unsigned int* shaderId);
             void update(float deltaTime) override; 
             void withdrawUI() override;
-            void setScale(glm::vec2 newScale) override;
     };
 }

@@ -25,7 +25,7 @@ namespace engine
     {
         unsigned int shaderId = Core::getShader();
         figure::PythagorasTree tree(1, 0, 2, 25, 3, 0.4, 0, &shaderId);
-        //figure::DragonsCurve curve(2, 0.1f, 0, &shaderId);
+        //figure::DragonsCurve curve(5, 0.1f, 0, &shaderId);
         int windowSize = Core::getWindowedHeight();
 
         ImGuiStyle& style = ImGui::GetStyle();
@@ -63,6 +63,7 @@ namespace engine
                 Core::setWindowSize(windowSize, windowSize);
             }
             tree.withdrawUI();
+            //curve.update(Core::getDeltaTime());
             ImGui::End();
 
             Core::endFrame();

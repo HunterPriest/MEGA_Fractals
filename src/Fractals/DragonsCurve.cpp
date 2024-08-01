@@ -3,9 +3,6 @@
 #include <Vector2.h>
 #include <math.h>    
 #include <Line.h>
-#include <glm/vec2.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
 
 figure::DragonsCurve::DragonsCurve(int iterations, float length, float xPos, unsigned int* shaderId)
 {
@@ -13,7 +10,7 @@ figure::DragonsCurve::DragonsCurve(int iterations, float length, float xPos, uns
     _length = length;
     _iterations = iterations;
 
-    _startPoint = {xPos, 0.0f};
+    startPoint = {xPos, 0.0f};
     setScale(glm::vec2(1, 1));
 }
 
@@ -35,17 +32,9 @@ void figure::DragonsCurve::drawCurve(engine::Vector2 startPoint, float length, f
 void figure::DragonsCurve::update(float deltaTime)
 {
     _points.clear();
-    drawCurve(_startPoint, _length, 0.0f, _iterations);
+    drawCurve(startPoint, _length, 0.0f, _iterations);
     //Line line(_points, 0.1f);
     //line.render();
-}
-
-void figure::DragonsCurve::setScale(glm::vec2 newScale)
-{ 
-    glm::mat4 trans = glm::mat4(1.0f);
-    trans = glm::scale(trans, glm::vec3(newScale.x, newScale.y, 0));  
-    unsigned int transformLoc = glGetUniformLocation(*_shaderId, "transform");
-    glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(trans));
 }
 
 void figure::DragonsCurve::withdrawUI() {   }

@@ -3,11 +3,7 @@
 #include <Vector2.h>
 #include <math.h>
 #include <iostream>
-#include <glm/vec2.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
 #include <imgui.h>
-#include <assert.h>
 
 #define SIZE_INT sizeof(int)
 
@@ -19,32 +15,26 @@ float speedRotation, int amountTrees, float length, float xPos, unsigned int* sh
     _length = length;
     _amountTrees = amountTrees;
     _amountBranchs = amountBranchs;
-    _iterations = iterations; 
+    this->iterations = iterations; 
     _speedRotation = speedRotation;
     _isRotate = true;
     _angle = angle;
 
-    _startPoint.x = xPos;
+    startPoint.x = xPos;
 
     if (amountTrees == 1)
     {
         _dir = 0;
-        _startPoint.y = -1.0f;
+        startPoint.y = -1.0f;
     }
     else
     {
-        _startPoint.y = 0.0f;
+        startPoint.y = 0.0f;
         _dir = 360 / amountTrees;
     }
-    _shaderId = shaderId;
+    this->shaderId = shaderId;
     setScale(glm::vec2(1, 1));   
-    resize();
-}
-
-figure::PythagorasTree::~PythagorasTree()
-{
-    free(_vbo);
-    _vbo = 0;
+    resize(_amountTrees);
 }
 
 void figure::PythagorasTree::update(float deltaTime)
@@ -55,13 +45,13 @@ void figure::PythagorasTree::update(float deltaTime)
 
     for (int i = 1; i < _amountTrees + 1; i++)
     {
-        createTree(_startPoint, _dir * i, _length, _iterations);
+        createTree(startPoint, _dir * i, _length, iterations);
     }
     
-    _line.setVerticles(_vbo, _sizeVbo);
+    _line.setVerticles(VBO, sizeVBO);
     _line.render();
 
-    _sizeVbo = 0;
+    sizeVBO = 0;
 }
 
 void figure::PythagorasTree::withdrawUI()
@@ -69,18 +59,18 @@ void figure::PythagorasTree::withdrawUI()
     Fractal::withdrawUI();
     ImGui::DragFloat("Length", &_length, 0.05f, 0.0f, 1, "%.3f", ImGuiSliderFlags_None);
     ImGui::DragFloat("Speed rotation", &_speedRotation, 0.1f, 0.0f, 100.0f, "%.3f", ImGuiSliderFlags_None);
-    if (ImGui::DragInt("Iteration", &_iterations, 0.05f, 0, 10, "%d", ImGuiSliderFlags_None))
+    if (ImGui::DragInt("Iteration", &iterations, 0.05f, 0, 10, "%d", ImGuiSliderFlags_None))
     {
-        resize();
+        resize(_amountTrees);
     }
     if(ImGui::DragInt("Amount tranchs", &_amountBranchs, 0.1f, 1, 6, "%d", ImGuiSliderFlags_None))
     {
-        resize();
+        resize(_amountTrees);
     }
     if(ImGui::DragInt("Amount trees", &_amountTrees, 0.1f, 1, 6, "%d", ImGuiSliderFlags_None))
     {
         updateAmountTrees();
-        resize();
+        resize(_amountTrees);
     }
     if(ImGui::Button("Rotate"))
     {
@@ -94,13 +84,11 @@ void figure::PythagorasTree::createTree(engine::Vector2 vector, float dir, float
     engine::Vector2 nextVector(vector.x + length * sin(dir * RADIAN), 
     vector.y + length * cos(dir * RADIAN));
 
-    _sizeVbo += 4;
-    _vbo[_sizeVbo - 4] = vector.x;
-    _vbo[_sizeVbo - 3] = vector.y;
-    _vbo[_sizeVbo - 2] = nextVector.x;
-    _vbo[_sizeVbo - 1] = nextVector.y;   
-
-    //std::cout << "prekol" << iterations << std::endl;   
+    sizeVBO += 4;
+    VBO[sizeVBO - 4] = vector.x;
+    VBO[sizeVBO - 3] = vector.y;
+    VBO[sizeVBO - 2] = nextVector.x;
+    VBO[sizeVBO - 1] = nextVector.y;   
 
     if (iterations > 0 && length > 0.0008f) 
     {       
@@ -111,47 +99,17 @@ void figure::PythagorasTree::createTree(engine::Vector2 vector, float dir, float
     }
 }
 
-void figure::PythagorasTree::resize()
+void figure::PythagorasTree::addIteration(int iterations)
 {
-    _amountElements = 0;
+    amountElements += 4;
 
-    //std::cout << _iterations << std::endl;
-
-    for (int i = 0; i < _amountTrees; i++)
-    {
-        addIteration(_iterations, _length);
-    }
-
-    if (_vbo)
-    {
-        free(_vbo);
-    }
-    _vbo = (float*)malloc(_amountElements * sizeof(float));
-    //_vbo = (float*)realloc(_vbo, _amountElements * sizeof(float));
-    std::cout << _amountElements << std::endl;
-}
-
-void figure::PythagorasTree::addIteration(int iterations, float length)
-{
-    _amountElements += 4;
-
-   //std::cout << "sdsdsd" << "prekol" << iterations << std::endl;
-
-    if (iterations > 0 && length > 0.0008f) 
+    if (iterations > 0) 
     {   
         for (int i = 0; i < _amountBranchs; i++)
         {
-            addIteration(iterations - 1, length * 0.5f);
+            addIteration(iterations - 1);
         }
     }
-}
-
-void figure::PythagorasTree::setScale(glm::vec2 newScale)
-{ 
-    glm::mat4 trans = glm::mat4(1.0f);
-    trans = glm::scale(trans, glm::vec3(newScale.x, newScale.y, 0));  
-    unsigned int transformLoc = glGetUniformLocation(*_shaderId, "transform");
-    glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(trans));
 }
 
 void figure::PythagorasTree::updateAmountTrees()
@@ -159,11 +117,11 @@ void figure::PythagorasTree::updateAmountTrees()
     if (_amountTrees == 1)  
     {
         _dir = 0;
-        _startPoint.y = -1.0f;
+        startPoint.y = -1.0f;
     }
     else
     {
-        _startPoint.y = 0.0f;
+        startPoint.y = 0.0f;
         _dir = 360 / _amountTrees;
     }
 }

@@ -1,5 +1,6 @@
 #include <Core.h>
 
+#include <Json.h>
 #include <nlohmann/json.hpp>
 #include <GLFW/glfw3.h>
 #include <glad/glad.h>
@@ -22,8 +23,7 @@ namespace Core
 
     int initalize()
     {
-        std::ifstream f("Configs/Window.json");
-        windowConfig = nlohmann::json::parse(f);
+        windowConfig = tools::loadJson("Configs/Window.json");  
 
         if (!glfwInit())
         {

@@ -1,12 +1,13 @@
 #pragma once 
 
 #include <nlohmann/json.hpp>
+#include <fstream>
 
 namespace tools
 {
-    nlohmann::json loadJson(const char *path)
+    inline nlohmann::json loadJson(const char *path)
     {
-        std::fstream f("Configs/Graphics.json");
+        std::ifstream f(path);
         return nlohmann::json::parse(f);
     }
 }
