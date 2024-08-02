@@ -4,12 +4,6 @@
 [submodule "vendopremake-ninja"]
 	path = vendopremake-ninja
 	url = https://github.com/jimon/premake-ninja.git
-[submodule "vendor/premake-ninja"]
-	path = vendor/premake-ninja
-	url = https://github.com/jimon/premake-ninja.git
-[submodule "vendor/glfw"]
-	path = vendor/glfw
-	url = https://github.com/glfw/glfw.git
 [submodule "vendor/glm"]
 	path = vendor/glm
 	url = https://github.com/g-truc/glm.git

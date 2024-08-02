@@ -1,4 +1,5 @@
 require "vendor/premake-ninja/ninja"
+require "vendor/premake-cmake/cmake"
 
 workspace "Fractals"
     architecture "x64"
@@ -8,6 +9,8 @@ workspace "Fractals"
 project "Fractals"
     language "C++"
     targetdir "build/bin/%{cfg.buildcfg}"
+
+    externalproject(vendor/glfw)
 
     files { "src/*.cpp",
      "src/Core/*.cpp",
