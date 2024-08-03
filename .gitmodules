@@ -10,6 +10,3 @@
 [submodule "vendor/glfw"]
 	path = vendor/glfw
 	url = https://github.com/TheCherno/glfw.git
-[submodule "imgui"]
-	path = imgui
-	url = https://github.com/ocornut/imgui.git

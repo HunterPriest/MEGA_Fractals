@@ -1,16 +1,15 @@
 require "vendor/premake-ninja/ninja"
-require "vendor/premake-cmake/cmake"
 
 workspace "Fractals"
     architecture "x64"
-    configurations { "Debug",  }
+    configurations { "Debug" }
     location "build"
 
 project "Fractals"
     language "C++"
     targetdir "build/bin/%{cfg.buildcfg}"
 
-    externalproject(vendor/glfw)
+    include "vendor/glfw/premake5.lua"
 
     files { "src/*.cpp",
      "src/Core/*.cpp",
@@ -23,6 +22,7 @@ project "Fractals"
      "src/Tools/*.cpp", 
      "src/Figure/*.cpp"
     }
+
     includedirs { "src/Core",
      "src/Gui",
      "src/Fractals",
@@ -35,6 +35,7 @@ project "Fractals"
      "src/Tools", 
      "src/Figure/"
     } 
+
     libdirs { "vendor/lib" }
     links { "glfw3dll" }
     defines { "GLFW_INCLUDE_NONE" }
