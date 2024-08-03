@@ -1,8 +1,5 @@
-[submodule "vendor/imgui"]
-	path = vendor/imgui
-	url = https://github.com/ocornut/imgui.git
-[submodule "vendopremake-ninja"]
-	path = vendopremake-ninja
+[submodule "vendor/remake-ninja"]
+	path = vendor/remake-ninja
 	url = https://github.com/jimon/premake-ninja.git
 [submodule "vendor/glm"]
 	path = vendor/glm
@@ -10,3 +7,9 @@
 [submodule "vendor/nlohmann"]
 	path = vendor/nlohmann
 	url = https://github.com/nlohmann/json.git
+[submodule "vendor/glfw"]
+	path = vendor/glfw
+	url = https://github.com/TheCherno/glfw.git
+[submodule "imgui"]
+	path = imgui
+	url = https://github.com/ocornut/imgui.git
