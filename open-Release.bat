@@ -1,0 +1,1 @@
+.\build\Release\bin\Fractals.exe

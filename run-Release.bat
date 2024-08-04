@@ -1,8 +1,8 @@
 premake5 --os=windows ninja
 pushd build
-ninja && goto :run
+ninja Release && goto :run
 popd
 goto :eof
 :run
 popd
-call open.bat
+call open-Release.bat

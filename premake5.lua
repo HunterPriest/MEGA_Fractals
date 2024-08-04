@@ -1,17 +1,20 @@
 require "vendor/premake-ninja/ninja"
 
 workspace "Fractals"
-    architecture "x64"
-    configurations { "Debug" }
+    configurations { "Debug", "Release" }
+    system ( "Windows" )
     location "build"
+    architecture "x64"
+    include "vendor/glfw.lua"
 
 project "Fractals"
     language "C++"
-    targetdir "build/bin/%{cfg.buildcfg}"
+    cppdialect "C++20"
+    toolset "Clang"
 
-    include "vendor/glfw/premake5.lua"
-
-    files { "src/*.cpp",
+    files
+    {
+     "src/*.cpp",
      "src/Core/*.cpp",
      "src/Gui/*.cpp",
      "src/Fractals/*.cpp",
@@ -23,7 +26,9 @@ project "Fractals"
      "src/Figure/*.cpp"
     }
 
-    includedirs { "src/Core",
+    includedirs 
+    {
+     "src/Core",
      "src/Gui",
      "src/Fractals",
      "vendor/glad", 
@@ -33,20 +38,29 @@ project "Fractals"
      "vendor/imgui",
      "vendor/nlohmann/include", 
      "src/Tools", 
-     "src/Figure/"
+     "src/Figure"
     } 
 
-    libdirs { "vendor/lib" }
-    links { "glfw3dll" }
+    links { "GLFW" }
     defines { "GLFW_INCLUDE_NONE" }
+
+    filter "system:Windows"
+        links { "user32", "gdi32", "shell32" }
 
     filter "configurations:Debug"
         kind "ConsoleApp"
-        cppdialect "C++20"
+        runtime "Debug"
         defines { "DEBUG" }
         symbols "On"
         linkoptions { "-fuse-ld=lld -g -Wl" }
+        targetdir "build/Debug/bin"
+        objdir  "build/obj/Debug"
+        libdirs { "build/Debug/GLFW" }
 
     filter "configurations:Release"
-        defines { "Release" }
-        optimize "On"
+        kind "WindowedApp"
+        runtime "Release"
+		optimize "Speed"
+        targetdir "build/Release/bin"
+        objdir  "build/obj/Release"
+        libdirs { "build/Release/GLFW" }
