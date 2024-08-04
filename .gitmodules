@@ -1,0 +1,15 @@
+[submodule "vendor/glfw"]
+	path = vendor/glfw
+	url = https://github.com/glfw/glfw.git
+[submodule "vendor/glm"]
+	path = vendor/glm
+	url = https://github.com/jimon/premake-ninja.git
+[submodule "vendor/premake-ninja"]
+	path = vendor/premake-ninja
+	url = https://github.com/jimon/premake-ninja.git
+[submodule "vendor/imgui"]
+	path = vendor/imgui
+	url = https://github.com/ocornut/imgui.git
+[submodule "vendor/nlohmann"]
+	path = vendor/nlohmann
+	url = https://github.com/nlohmann/json.git
