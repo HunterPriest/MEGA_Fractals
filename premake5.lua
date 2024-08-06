@@ -42,7 +42,7 @@ project "Fractals"
     } 
 
     links { "GLFW" }
-    defines { "GLFW_INCLUDE_NONE" }
+    defines { "GLFW_INCLUDE_NONE", "_USE_MATH_DEFINES" }
 
     filter "system:Windows"
         links { "user32", "gdi32", "shell32" }
@@ -60,7 +60,6 @@ project "Fractals"
     filter "configurations:Release"
         kind "WindowedApp"
         runtime "Release"
-		optimize "Speed"
         targetdir "build/Release/bin"
         objdir  "build/obj/Release"
         libdirs { "build/Release/GLFW" }

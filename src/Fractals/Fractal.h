@@ -8,12 +8,13 @@ namespace figure
     class Fractal
     {
         protected:
-            float *VBO;
+            float *VBO = 0;
             unsigned int *shaderId;
-            int amountElements, sizeVBO, iterations;
+            int amountElements, VBOindex, iterations;
             engine::Vector2 startPoint;
+            
             void resize(int amountRepeats);
-            virtual void addIteration(int iterations) = 0;
+            virtual void calculateAmountElements(int iterations) = 0;
 
         public:
             virtual void update(float deltaTime) = 0;

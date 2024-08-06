@@ -48,10 +48,10 @@ void figure::PythagorasTree::update(float deltaTime)
         createTree(startPoint, _dir * i, _length, iterations);
     }
     
-    _line.setVerticles(VBO, sizeVBO);
+    _line.setVerticles(VBO, VBOindex);
     _line.render();
 
-    sizeVBO = 0;
+    VBOindex = 0;
 }
 
 void figure::PythagorasTree::withdrawUI()
@@ -84,11 +84,11 @@ void figure::PythagorasTree::createTree(engine::Vector2 vector, float dir, float
     engine::Vector2 nextVector(vector.x + length * sin(dir * RADIAN), 
     vector.y + length * cos(dir * RADIAN));
 
-    sizeVBO += 4;
-    VBO[sizeVBO - 4] = vector.x;
-    VBO[sizeVBO - 3] = vector.y;
-    VBO[sizeVBO - 2] = nextVector.x;
-    VBO[sizeVBO - 1] = nextVector.y;   
+    VBOindex += 4;
+    VBO[VBOindex - 4] = vector.x;
+    VBO[VBOindex - 3] = vector.y;
+    VBO[VBOindex - 2] = nextVector.x;
+    VBO[VBOindex - 1] = nextVector.y;   
 
     if (iterations > 0 && length > 0.0008f) 
     {       
@@ -99,7 +99,7 @@ void figure::PythagorasTree::createTree(engine::Vector2 vector, float dir, float
     }
 }
 
-void figure::PythagorasTree::addIteration(int iterations)
+void figure::PythagorasTree::calculateAmountElements(int iterations)
 {
     amountElements += 4;
 
@@ -107,7 +107,7 @@ void figure::PythagorasTree::addIteration(int iterations)
     {   
         for (int i = 0; i < _amountBranchs; i++)
         {
-            addIteration(iterations - 1);
+            calculateAmountElements(iterations - 1);
         }
     }
 }

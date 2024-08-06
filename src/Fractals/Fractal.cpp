@@ -24,19 +24,19 @@ void figure::Fractal::resize(int amountRepeats)
 
     for (int i = 0; i < amountRepeats; i++)
     {
-        addIteration(iterations);
+        calculateAmountElements(iterations);
     }
 
     VBO = (float*)realloc(VBO, amountElements * sizeof(float));
 }
 
-void figure::Fractal::addIteration(int iterations)
+void figure::Fractal::calculateAmountElements(int iterations)
 {
     amountElements += 4;
 
     if (iterations > 0) 
     {   
-        addIteration(iterations - 1);
+        calculateAmountElements(iterations - 1);
     }
 }
 

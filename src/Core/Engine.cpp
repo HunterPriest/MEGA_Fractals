@@ -24,8 +24,8 @@ namespace engine
     int update()
     {
         unsigned int shaderId = Core::getShader();
-        figure::PythagorasTree tree(1, 0, 2, 25, 3, 0.4, 0, &shaderId);
-        //figure::DragonsCurve curve(5, 0.1f, 0, &shaderId);
+        //figure::PythagorasTree tree(1, 0, 2, 25, 3, 0.4, 0, &shaderId);
+        figure::DragonsCurve curve(5, 0.1f, 0, &shaderId);
         int windowSize = Core::getWindowedHeight();
 
         ImGuiStyle& style = ImGui::GetStyle();
@@ -35,8 +35,8 @@ namespace engine
         {
             Core::beginFrame();
             
-            tree.update(Core::getDeltaTime());
-            //curve.update(Core::getDeltaTime());
+            //tree.update(Core::getDeltaTime());
+            curve.update(Core::getDeltaTime());
         
             // ImGui::SetNextWindowPos(ImVec2(0.0f, 0.0f));
             // ImGui::SetNextWindowSize(ImGui::GetIO().DisplaySize);
@@ -62,7 +62,7 @@ namespace engine
             {
                 Core::setWindowSize(windowSize, windowSize);
             }
-            tree.withdrawUI();
+            //tree.withdrawUI();
             //curve.update(Core::getDeltaTime());
             ImGui::End();
 
